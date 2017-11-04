@@ -1,1 +1,155 @@
-<h1>Test</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ASSIST Redesign</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="selectize.css">.
+    <style type="text/css">
+        
+        html, body {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-width: 320px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .screen {
+            position: absolute;
+            min-width: 260px;
+            margin: 30px 0;
+            top: 50%;
+            left: 30px;
+            right: 30px;
+            text-align: center;
+            transform: translateY(-50%);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 30px;
+            font: normal 20px/normal Verdana, Geneva, sans-serif;
+            color: #777777;
+        }
+
+        button {
+            display: inline-block;
+            width: 45%;
+            margin: 0 15px;
+            height: 80px;
+            border: 0;
+            outline: 0;
+            cursor: pointer;
+            font: normal 16px/normal Verdana, Geneva, sans-serif;
+            color: #ecf0f1;
+        }
+
+        #transfer {
+            background: #3498db;
+        }
+
+        #transfer:hover {
+            background: #2980b9;
+            transform: scale(1.05, 1.05);
+        }
+
+        #credits {
+            background: #34495e;
+        }
+
+        #credits:hover {
+            background: #2c3e50;
+            transform: scale(1.05, 1.05);
+        }
+
+        @media only screen and (max-width: 700px) {
+            button {
+                display: block;
+                width: 80%;
+                margin: 0 auto;
+            }
+            #transfer {
+                margin-bottom: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+
+        <div id="route_chooser" class="screen">
+            <label>Would you like to transfer to a new school or get credits from another school?</label>
+            <button id="transfer">Transfer Schools</button>
+            <button id="credits">Get Credits</button>
+        </div>
+
+        <div id="screen_1" class="screen">
+            <label for="from_college">What college are you in now?</label>
+            <select name="from_college" id="from_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
+        </div>
+
+        <div id="screen_2_a" class="screen">
+            <label for="to_college">What College do you want to transfer to?</label>
+            <input type="text" name="to_college" id="to_college">
+        </div>
+
+        <div id="screen_2_b" class="screen">
+            <label for="to_college">What college do you want credits from?</label>
+            <input type="text" name="to_college" id="to_college">
+        </div>
+
+        <div id="screen_3" class="screen">
+            <label for="major">What is your major?</label>
+            <input type="text" name="major" id="major">
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="selectize.min.js"></script>
+
+    <script type="text/javascript">
+
+        var choice = 0,
+            fromCollege = "",
+            toCollege = "",
+            major = "";
+        
+        $('.screen').hide();
+        $('#route_chooser').fadeIn();
+
+        $('#transfer').click(function(e) {
+            e.preventDefault();
+            choice = 1;
+            $('#route_chooser').fadeOut();
+            $('#screen_1').fadeIn();
+        });
+
+        $('#credits').click(function(e) {
+            e.preventDefault();
+            choice = 2;
+            $('#route_chooser').fadeOut();
+            $('#screen_1').fadeIn();
+        });
+
+        var colleges = ["University of California: San Diego (UCSD)", "San Diego Mesa College"];
+        for(var i = 0; i < colleges.length; i++) {
+          jQuery('<option/>', {value: colleges[i], html: colleges[i]}).appendTo('#from_college');
+        }
+
+        $('#from_college').selectize();
+
+
+    </script>
+
+</body>
+</html>

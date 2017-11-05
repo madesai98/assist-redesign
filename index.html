@@ -3,7 +3,7 @@
 <head>
     <title>ASSIST Redesign</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="selectize.css">.
+    <link rel="stylesheet" type="text/css" href="selectize.css">
     <style type="text/css">
         
         html, body {
@@ -81,6 +81,91 @@
             }
         }
 
+        #controls {
+            max-width: 500px;
+            margin: 22px auto 0;
+        }
+
+        .arrow {
+            display: inline-block;
+            position: relative;
+            width: 100px;
+            height: 36px;
+            border: 2px solid #777;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .arrow:after {
+            content: '';
+            display: inline-block;
+            margin-top: 9px;
+            width: 16px;
+            height: 16px;
+            border-top: 2px solid #777;
+            border-right: 2px solid #777;
+        }
+
+        .arrow:hover {
+            background: #3498db;
+            border-color: #3498db;
+        }
+
+        .arrow:hover span {
+            color: #ecf0f1;
+            border-color: #ecf0f1;
+        }
+
+        .arrow:hover:after {
+            border-color: #ecf0f1;
+        }
+
+        .arrow span {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font: normal 16px/normal Verdana, Geneva, sans-serif;
+            color: #777777;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .right:after {
+            margin-left: 51px;
+            -moz-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .right span {
+            right: 36px;
+            height: 38px;
+            padding-right: 10px;
+            line-height: 38px;
+            border-right: 2px solid #777;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .left:after {
+            margin-right: 51px;
+            -moz-transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+
+        .left span {
+            left: 36px;
+            height: 38px;
+            padding-left: 10px;
+            line-height: 38px;
+            border-left: 2px solid #777;
+        }
+
     </style>
 </head>
 <body>
@@ -94,22 +179,36 @@
 
         <div id="screen_1" class="screen">
             <label for="from_college">What college are you in now?</label>
-            <select name="from_college" id="from_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
+            <select class="college" id="from_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
+            <div id="controls">
+                <span class="arrow left" data-target="route_chooser"><span>Back</span></span>
+                <span class="arrow right" data-target="screen_2"><span>Next</span></span>
+            </div>
         </div>
 
-        <div id="screen_2_a" class="screen">
-            <label for="to_college">What College do you want to transfer to?</label>
-            <input type="text" name="to_college" id="to_college">
-        </div>
-
-        <div id="screen_2_b" class="screen">
-            <label for="to_college">What college do you want credits from?</label>
-            <input type="text" name="to_college" id="to_college">
+        <div id="screen_2" class="screen">
+            <label for="to_college">What college do you want to transfer to?</label>
+            <select class="college" id="to_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
+            <div id="controls">
+                <span class="arrow left" data-target="screen_1"><span>Back</span></span>
+                <span class="arrow right" data-target="screen_3"><span>Next</span></span>
+            </div>
         </div>
 
         <div id="screen_3" class="screen">
             <label for="major">What is your major?</label>
-            <input type="text" name="major" id="major">
+            <select class="major" id="major" placeholder="Pick a major..."><option value="" selected="selected"></option></select>
+            <div id="controls">
+                <span class="arrow left" data-target="screen_2"><span>Back</span></span>
+                <span class="arrow right" data-target="screen_4"><span>Next</span></span>
+            </div>
+        </div>
+
+        <div id="screen_4" class="screen">
+            <label for="major">Here are your classes</label>
+            <div id="controls">
+                <span class="arrow left" data-target="screen_3"><span>Back</span></span>
+            </div>
         </div>
 
     </div>
@@ -118,35 +217,353 @@
     <script type="text/javascript" src="selectize.min.js"></script>
 
     <script type="text/javascript">
-
-        var choice = 0,
-            fromCollege = "",
-            toCollege = "",
-            major = "";
         
         $('.screen').hide();
         $('#route_chooser').fadeIn();
 
         $('#transfer').click(function(e) {
             e.preventDefault();
-            choice = 1;
+            $('#screen_2 label').text("What college do you want to transfer to?");
             $('#route_chooser').fadeOut();
             $('#screen_1').fadeIn();
         });
 
         $('#credits').click(function(e) {
             e.preventDefault();
-            choice = 2;
+            $('#screen_2 label').text("What college do you want credits from?");
             $('#route_chooser').fadeOut();
             $('#screen_1').fadeIn();
         });
 
-        var colleges = ["University of California: San Diego (UCSD)", "San Diego Mesa College"];
+        $('.arrow').click(function() {
+            $(this).parent().parent().fadeOut();
+            $('#' + $(this).data("target")).fadeIn();
+        });
+
+        var colleges = [
+            "Allan Hancock College",
+            "American River College",
+            "Antelope Valley College",
+            "Bakersfield College",
+            "Barstow Community College",
+            "Berkeley City College",
+            "Butte College",
+            "Cabrillo College",
+            "California Maritime Academy",
+            "California Polytechnic University, Pomona",
+            "California Polytechnic University, San Luis Obispo",
+            "California State University, Bakersfield",
+            "California State University, Channel Islands",
+            "California State University, Chico",
+            "California State University, Dominguez Hills",
+            "California State University, East Bay",
+            "California State University, Fresno",
+            "California State University, Fullerton",
+            "California State University, Hayward",
+            "California State University, Long Beach",
+            "California State University, Los Angeles",
+            "California State University, Monterey Bay",
+            "California State University, Northridge",
+            "California State University, Sacramento",
+            "California State University, San Bernardino",
+            "California State University, San Marcos",
+            "California State University, Stanislaus",
+            "Canada College",
+            "Cerritos College",
+            "Cerro Coso Community College",
+            "Chabot College",
+            "Chaffey College",
+            "Citrus College",
+            "City College of San Francisco",
+            "Clovis Community College",
+            "Coastline Community College",
+            "College of Alameda",
+            "College of Marin",
+            "College of San Mateo",
+            "College of the Canyons",
+            "College of the Desert",
+            "College of the Redwoods",
+            "College of the Sequoias",
+            "College of the Siskiyous",
+            "Columbia College",
+            "Compton Community College",
+            "Contra Costa College",
+            "Copper Mountain College",
+            "Cosumnes River College",
+            "Crafton Hills College",
+            "Cuesta College",
+            "Cuyamaca College",
+            "Cypress College",
+            "D-Q University",
+            "De Anza College",
+            "Diablo Valley College",
+            "East Los Angeles College",
+            "El Camino College",
+            "Evergreen Valley College",
+            "Feather River College",
+            "Folsom Lake College",
+            "Foothill College",
+            "Fresno City College",
+            "Fullerton College",
+            "Gavilan College",
+            "Glendale Community College",
+            "Golden West College",
+            "Grossmont College",
+            "Hartnell College",
+            "Humboldt State University",
+            "Imperial Valley College",
+            "Irvine Valley College",
+            "Kings River College",
+            "Lake Tahoe Community College",
+            "Laney College",
+            "Las Positas College",
+            "Lassen Community College",
+            "Long Beach City College",
+            "Los Angeles City College",
+            "Los Angeles Harbor College",
+            "Los Angeles Mission College",
+            "Los Angeles Pierce College",
+            "Los Angeles Southwest College",
+            "Los Angeles Trade Technical College",
+            "Los Angeles Valley College",
+            "Los Medanos College",
+            "Marymount California University",
+            "Marymount College",
+            "Mendocino College",
+            "Merced College",
+            "Merritt College",
+            "MiraCosta College",
+            "Mission College",
+            "Modesto Junior College",
+            "Monterey Peninsula College",
+            "Moorpark College",
+            "Moreno Valley College",
+            "Mount San Antonio College",
+            "Mt. San Jacinto College",
+            "Napa Valley College",
+            "Norco College",
+            "Ohlone College",
+            "Orange Coast College",
+            "Oxnard College",
+            "Palo Verde College",
+            "Palomar College",
+            "Pasadena City College",
+            "Porterville College",
+            "Rancho Santiago College",
+            "Reedley College",
+            "Rio Hondo College",
+            "Riverside City College",
+            "Sacramento City College",
+            "Saddleback College",
+            "San Bernardino Valley College",
+            "San Diego City College",
+            "San Diego Mesa College",
+            "San Diego Miramar College",
+            "San Diego State University",
+            "San Francisco State University",
+            "San Joaquin Delta College",
+            "San Jose City College",
+            "San Jose State University",
+            "Santa Ana College",
+            "Santa Barbara City College",
+            "Santa Monica College",
+            "Santa Rosa Junior College",
+            "Santiago Canyon College",
+            "Shasta College",
+            "Sierra College",
+            "Skyline College",
+            "Solano Community College",
+            "Sonoma State University",
+            "Southwestern College",
+            "Taft College",
+            "UC Davis School of Veterinary Medicine",
+            "UCSF School of Dentistry",
+            "UCSF School of Pharmacy",
+            "University of California, Berkeley (UCB)",
+            "University of California, Davis (UCD)",
+            "University of California, Irvine (UCI)",
+            "University of California, Los Angeles (UCLA)",
+            "University of California, Merced (UCM)",
+            "University of California, Riverside (UCR)",
+            "University of California, San Diego (UCSD)",
+            "University of California, Santa Barbara (UCSB)",
+            "University of California, Santa Cruz (UCSC)",
+            "Ventura College",
+            "Victor Valley College",
+            "Vista Community College",
+            "West Hills College Coalinga",
+            "West Hills College Lemoore",
+            "West Los Angeles College",
+            "West Valley College",
+            "Woodland Community College",
+            "Yuba College"
+        ];
+
+        var majors = [
+            "Accounting Minor: Rady School of Management",
+            "Business Minor: Rady School of Management",
+            "Anthropology B.A. with Concentration in Archaeology",
+            "Anthropology B.A. with Concentration in Biological Anthropology",
+            "Anthropology B.A. with Concentration in Sociocultural Anthropology",
+            "Bioengineering B.S.",
+            "Bioengineering: Bioinformatics B.S.",
+            "Bioengineering: BioSystems B.S.",
+            "Bioengineering: Biotechnology B.S.",
+            "Biology with a Specialization in Bioinformatics B.S.",
+            "Biology: Biochemistry and Cell Biology B.S.",
+            "Biology: Ecology, Behavior, and Evolution B.S.",
+            "Biology: General Biology B.S.",
+            "Biology: Human Biology B.S.",
+            "Biology: Microbiology B.S.",
+            "Biology: Molecular Biology B.S.",
+            "Biology: Physiology and Neuroscience B.S.",
+            "Chem &amp; Biochem: Bioinformatics from Dept. of Chem &amp; Biochem B.S.",
+            "Chemistry and Biochemistry: Biochemistry/Chemistry B.S.",
+            "Chemistry and Biochemistry: Chemical Education B.S.",
+            "Chemistry and Biochemistry: Chemical Physics B.S.",
+            "Chemistry and Biochemistry: Chemistry B.S.",
+            "Chemistry and Biochemistry: Environmental Chemistry B.S.",
+            "Chemistry and Biochemistry: Molecular Synthesis B.S.",
+            "Chemistry and Biochemistry: Pharmacological Chemistry B.S.",
+            "Chinese Studies B.A.",
+            "Classical Studies B.A.",
+            "Cognitive Science B.A.",
+            "Cognitive Science B.S.",
+            "Cognitive Science B.S. Specialization in Clin Aspcts of Cogn",
+            "Cognitive Science B.S. Specialization in Hum Comp Interaction",
+            "Cognitive Science B.S. with Specialization in Computation",
+            "Cognitive Science B.S. with Specialization in Human Cognition",
+            "Cognitive Science B.S. with Specialization in Neuroscience",
+            "Cognitive Science: Cognitive and Behavioral Neuroscience B.S.",
+            "Communication B.A.",
+            "Critical Gender Studies B.A.",
+            "CSE: Computer Engineering B.S.",
+            "CSE: Computer Science B.A.",
+            "CSE: Computer Science B.S.",
+            "CSE: Computer Science with a Specialization in Bioinformatics B.S.",
+            "Dance B.A.",
+            "Earth Sciences B.S.",
+            "ECE: Computer Engineering B.S.",
+            "ECE: Electrical Engineering and Society B.A.",
+            "ECE: Electrical Engineering B.S.",
+            "ECE: Engineering Physics B.S.",
+            "Economics B.A.",
+            "Economics: Joint Major in Mathematics and Economics B.S.",
+            "Economics: Management Science B.S.",
+            "Environmental Systems/Earth Sciences B.S.",
+            "Environmental Systems/Ecology, Behavior, and Evolution B.S.",
+            "Environmental Systems/Environmental Chemistry B.S.",
+            "Environmental Systems/Environmental Policy B.A.",
+            "Ethnic Studies B.A.",
+            "German Studies B.A.",
+            "Global Health B.A.",
+            "History B.A.",
+            "Human Development B.A.",
+            "Human Development B.S.",
+            "International Studies - Anthropology B.A.",
+            "International Studies - Bachelor/Master (B.A./M.I.A.)",
+            "International Studies - Economics B.A.",
+            "International Studies - History B.A.",
+            "International Studies - International Business B.A.",
+            "International Studies - Linguistics B.A.",
+            "International Studies - Literature B.A.",
+            "International Studies - Political Science B.A.",
+            "International Studies - Sociology  B.A.",
+            "Italian Studies B.A.",
+            "Japanese Studies B.A.",
+            "Jewish Studies B.A.",
+            "Latin American Studies B.A.",
+            "Linguistics B.A.",
+            "Linguistics Language Program",
+            "Linguistics with Specialization in Cognition and Language B.A.",
+            "Linguistics with Specialization in Language and Society B.A.",
+            "Linguistics: Language Studies Specialization in one language B.A.",
+            "Literature/Cultural Studies B.A.",
+            "Literature/Writing B.A.",
+            "Literature: Composite Major B.A.",
+            "Literature: Russian Literature B.A.",
+            "Literature: Spanish and Latin American Literature B.A.",
+            "Literature: U.S. Latino/a &amp; Latin American Literatures B.A.",
+            "Literatures in English B.A.",
+            "Literatures in French B.A.",
+            "Literatures in German B.A.",
+            "Literatures in Italian B.A.",
+            "Literatures of the World B.A.",
+            "MAE: Aerospace Engineering B.S.",
+            "MAE: Environmental Engineering B.S.",
+            "MAE: Mechanical Engineering B.S.",
+            "Marine Biology B.S.",
+            "Mathematics B.S.",
+            "Mathematics/Applied Science B.S.",
+            "Mathematics/Computer Science B.S.",
+            "Mathematics/Secondary Education B.A.",
+            "Mathematics: Applied Mathematics B.S.",
+            "Mathematics: Joint Major in Mathematics and Economics B.S.",
+            "Mathematics: Probability and Statistics B.S.",
+            "Mathematics: Scientific Computation B.S.",
+            "Music B.A.",
+            "Music/Humanities Major B.A.",
+            "Music: Interdisciplinary Computing in the Arts Major (ICAM) B.A.",
+            "NANO: Chemical Engineering B.S.",
+            "NANO: NanoEngineering B.S.",
+            "Philosophy B.A.",
+            "Physics B.A.",
+            "Physics B.A. Secondary Education",
+            "Physics B.S.",
+            "Physics B.S. with Specialization in Astrophysics",
+            "Physics B.S. with Specialization in Biophysics",
+            "Physics B.S. with Specialization in Computational Physics",
+            "Physics B.S. with Specialization in Earth Sciences",
+            "Physics B.S. with Specialization in Materials Physics",
+            "Political Science B.A.",
+            "Political Science/American Politics B.A.",
+            "Political Science/Comparative Politics B.A.",
+            "Political Science/International Relations B.A.",
+            "Political Science/Political Theory B.A.",
+            "Political Science/Public Law B.A.",
+            "Political Science/Public Policy B.A.",
+            "Psychology B.A.",
+            "Psychology B.S.",
+            "Psychology B.S. with a Specialization in Clinical Psychology",
+            "Psychology B.S. with a Specialization in Cognitive Psychology",
+            "Psychology B.S. with a Specialization in Developmental Psychology",
+            "Psychology B.S. with a Specialization in Human Health",
+            "Psychology B.S. with a Specialization in Sensation and Perception",
+            "Psychology B.S. with a Specialization in Social Psychology",
+            "Psychology: Cognitive and Behavioral Neuroscience B.S.",
+            "Public Health B.S.",
+            "Religion, Study of B.A.",
+            "Russian, East European, and Eurasian Studies B.A.",
+            "Sociology B.A.",
+            "Sociology/American Studies B.A.",
+            "Sociology/Culture and Communication B.A.",
+            "Sociology/Economy and Society B.A.",
+            "Sociology/International Studies B.A.",
+            "Sociology/Law and Society B.A.",
+            "Sociology/Science and Medicine B.A.",
+            "Sociology/Social Inequalities B.A.",
+            "Structural Engineering B.S.",
+            "Structural Engineering: Engineering Sciences B.S.",
+            "Theatre and Dance B.A.",
+            "Theatre B.A.",
+            "Third World Studies B.A.",
+            "Urban Studies and Planning B.A.",
+            "Visual Arts/Art History/Criticism B.A.",
+            "Visual Arts/Interdisciplinary Computing in the Arts Major (ICAM) B.A.",
+            "Visual Arts/Media B.A.",
+            "Visual Arts/Speculative Design B.A.",
+            "Visual Arts/Studio B.A."
+        ];
+
         for(var i = 0; i < colleges.length; i++) {
-          jQuery('<option/>', {value: colleges[i], html: colleges[i]}).appendTo('#from_college');
+          jQuery('<option/>', {value: colleges[i], html: colleges[i]}).appendTo('.college');
         }
 
-        $('#from_college').selectize();
+        for(var i = 0; i < majors.length; i++) {
+          jQuery('<option/>', {value: majors[i], html: majors[i]}).appendTo('.major');
+        }
+
+        $('select').selectize();
 
 
     </script>

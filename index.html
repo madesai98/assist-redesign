@@ -166,6 +166,65 @@
             border-left: 2px solid #777;
         }
 
+        #screen_4 {
+            position: relative;
+            max-width: 775px;
+            margin: 30px auto;
+            padding: 0 10px;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: none;
+        }
+
+        .class_group {
+            display: flex;
+            margin-bottom: 10px;
+            border: 1px solid #777777;
+        }
+
+        .class {
+            flex: 1;
+            padding: 15px;
+            font: normal 16px/normal Verdana, Geneva, sans-serif;
+            color: #3498db;
+        }
+
+        #from_class {
+            border-right: 1px solid #777777;
+        }
+
+        .class p {
+            font: normal 10px/normal Verdana, Geneva, sans-serif;
+            color: #b0b0b0;
+        }
+
+        #class_search {
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 50px;
+            border: 1px solid #777777;
+            outline: 0;
+            margin-bottom: 30px;
+            padding: 5px 10px;
+            text-align: center;
+            font: normal 16px/normal Verdana, Geneva, sans-serif;
+            color: #777777;
+        }
+
+        ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: #b0b0b0;
+        }
+        ::-moz-placeholder { /* Firefox 19+ */
+          color: #b0b0b0;
+        }
+        :-ms-input-placeholder { /* IE 10+ */
+          color: #b0b0b0;
+        }
+        :-moz-placeholder { /* Firefox 18- */
+          color: #b0b0b0;
+        }
+
     </style>
 </head>
 <body>
@@ -206,8 +265,83 @@
 
         <div id="screen_4" class="screen">
             <label for="major">Here are your classes</label>
+            <input type="text" id="class_search" placeholder="Search for a course here...">
+            <div id="classes">
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 8A<p>Introduction to Computer Science: Java</p></span>
+                    <span id="to_class" class="class">CISC 190<p>JAVA Programming</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 8B<p>Introduction to Computer Science: Java</p></span>
+                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 11<p>Introduction to Computer Science and Object-Oriented Programming: Java</p></span>
+                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 12<p>Basic Data Structures and Object-Oriented Design</p></span>
+                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 15L<p>Software Tools and Techniques Laboratory</p></span>
+                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 20<p>Introduction to Discrete Mathematics</p></span>
+                    <span id="to_class" class="class">MATH 245<p>Discrete Mathematics</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 21<p>Mathematics for Algorithm and Systems</p></span>
+                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CSE 30<p>Computer Organization and Systems Programming</p></span>
+                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">MATH 20A<p>Calculus for Science and Engineering</p></span>
+                    <span id="to_class" class="class">MATH 150<p>Calculus with Analytic Geometry I</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">MATH 20B<p>Calculus for Science and Engineering</p></span>
+                    <span id="to_class" class="class">MATH 151<p>Calculus with Analytic Geometry II</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">MATH 20C<p>Calculus and Analytic Geometry for Science and Engineering</p></span>
+                    <span id="to_class" class="class">MATH 252<p>Calculus with Analytic Geometry III</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">MATH 18<p>Linear Algebra</p></span>
+                    <span id="to_class" class="class">MATH 254<p>Introduction to Linear Algebra</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">PHYS 2A<p>Physics - Mechanics</p></span>
+                    <span id="to_class" class="class">PHYS 195<p>Mechanics</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">PHYS 2B<p>Physics - Electricity and Magnetism</p></span>
+                    <span id="to_class" class="class">PHYS 196<p>Electricity and Magnetism</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CHEM 6A<p>General Chemistry I</p></span>
+                    <span id="to_class" class="class">CHEM 200<p>General Chemistry I</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">CHEM 6B<p>General Chemistry II</p></span>
+                    <span id="to_class" class="class">CHEM 200 &amp; CHEM 201<p>General Chemistry I</p><p>&amp;</p><p>General Chemistry II</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">BILD 1<p>The Cell</p></span>
+                    <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
+                </div>
+                <div class="class_group">
+                    <span id="from_class" class="class">BILD 2<p>Multicellular Life</p></span>
+                    <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
+                </div>
+            </div>
             <div id="controls">
-                <span class="arrow left" data-target="screen_3"><span>Back</span></span>
+                <span class="arrow left" data-target="screen_3" style="float: none;"><span>Back</span></span>
             </div>
         </div>
 
@@ -564,6 +698,22 @@
         }
 
         $('select').selectize();
+
+        $('.class_group').each(function() {
+            if ($(this).html().indexOf('N/A') >= 0) {
+                $(this).children().css('color', '#e74c3c');
+            }
+        });
+
+        $("#class_search").bind("propertychange change click keyup input paste", function(event) {
+            var search = $(this).val();
+            $('.class_group').each(function() {
+                $(this).show();
+                if ($(this).html().toLowerCase().indexOf(search.toLowerCase()) < 0) {
+                    $(this).hide();
+                }
+            });
+        });
 
 
     </script>

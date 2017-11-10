@@ -4,6 +4,7 @@
     <title>ASSIST Redesign</title>
     <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
     <link rel="stylesheet" type="text/css" href="css/selectize.css">
+    <link rel="stylesheet" type="text/css" href="css/simplebar.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/nav.css">
 </head>
@@ -61,119 +62,143 @@
         </nav>
 
         <div id="page">
-            <div id="route_chooser" class="screen">
-                <label>Would you like to transfer to a new school or get credits from another school?</label>
-                <button id="transfer">Transfer Schools</button>
-                <button id="credits">Get Credits</button>
-            </div>
+            <div id="container">
 
-            <div id="screen_1" class="screen">
-                <label for="from_college">What college are you in now?</label>
-                <select class="college" id="from_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
-                <div id="controls">
-                    <span class="arrow left" data-target="route_chooser"><span>Back</span></span>
-                    <span class="arrow right" data-target="screen_2"><span>Next</span></span>
-                </div>
-            </div>
+                <div id="background"></div>
+                <div id="color-overlay"></div>
 
-            <div id="screen_2" class="screen">
-                <label for="to_college">What college do you want to transfer to?</label>
-                <select class="college" id="to_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
-                <div id="controls">
-                    <span class="arrow left" data-target="screen_1"><span>Back</span></span>
-                    <span class="arrow right" data-target="screen_3"><span>Next</span></span>
+                <div id="intro" class="screen" data-page="0">
+                    <h2><span>Explore</span> Transfer Information<p>Find what credits are transferable from college to college...</p></h2>
+                    <div><button><span>Click here to get started</span></button></div>
                 </div>
-            </div>
 
-            <div id="screen_3" class="screen">
-                <label for="major">What is your major?</label>
-                <select class="major" id="major" placeholder="Pick a major..."><option value="" selected="selected"></option></select>
-                <div id="controls">
-                    <span class="arrow left" data-target="screen_2"><span>Back</span></span>
-                    <span class="arrow right" data-target="screen_4"><span>Next</span></span>
-                </div>
-            </div>
+                <div id="slider">
+                    <div id="route_chooser" class="screen" data-page="1">
+                        <div class="page-container">
+                            <label>Would you like to transfer to a new school or get credits from another school?</label>
+                            <button id="transfer">Transfer Schools</button>
+                            <button id="credits">Get Credits</button>
+                        </div>
+                    </div>
 
-            <div id="screen_4" class="screen">
-                <label for="major">Here are your classes</label>
-                <input type="text" id="class_search" placeholder="Search for a course here...">
-                <div id="classes">
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 8A<p>Introduction to Computer Science: Java</p></span>
-                        <span id="to_class" class="class">CISC 190<p>JAVA Programming</p></span>
+                    <div id="screen_1" class="screen" data-page="2">
+                        <div class="page-container">
+                            <label for="from_college">What college are you in now?</label>
+                            <select class="college" id="from_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
+                            <div id="controls">
+                                <span class="arrow left" data-target="route_chooser"><span>Back</span></span>
+                                <span class="arrow right" data-target="screen_2"><span>Next</span></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 8B<p>Introduction to Computer Science: Java</p></span>
-                        <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+
+                    <div id="screen_2" class="screen" data-page="3">
+                        <div class="page-container">
+                            <label for="to_college">What college do you want to transfer to?</label>
+                            <select class="college" id="to_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
+                            <div id="controls">
+                                <span class="arrow left" data-target="screen_1"><span>Back</span></span>
+                                <span class="arrow right" data-target="screen_3"><span>Next</span></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 11<p>Introduction to Computer Science and Object-Oriented Programming: Java</p></span>
-                        <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+
+                    <div id="screen_3" class="screen" data-page="4">
+                        <div class="page-container">
+                            <label for="major">What is your major?</label>
+                            <select class="major" id="major" placeholder="Pick a major..."><option value="" selected="selected"></option></select>
+                            <div id="controls">
+                                <span class="arrow left" data-target="screen_2"><span>Back</span></span>
+                                <span class="arrow right" data-target="screen_4"><span>Next</span></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 12<p>Basic Data Structures and Object-Oriented Design</p></span>
-                        <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 15L<p>Software Tools and Techniques Laboratory</p></span>
-                        <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 20<p>Introduction to Discrete Mathematics</p></span>
-                        <span id="to_class" class="class">MATH 245<p>Discrete Mathematics</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 21<p>Mathematics for Algorithm and Systems</p></span>
-                        <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CSE 30<p>Computer Organization and Systems Programming</p></span>
-                        <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">MATH 20A<p>Calculus for Science and Engineering</p></span>
-                        <span id="to_class" class="class">MATH 150<p>Calculus with Analytic Geometry I</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">MATH 20B<p>Calculus for Science and Engineering</p></span>
-                        <span id="to_class" class="class">MATH 151<p>Calculus with Analytic Geometry II</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">MATH 20C<p>Calculus and Analytic Geometry for Science and Engineering</p></span>
-                        <span id="to_class" class="class">MATH 252<p>Calculus with Analytic Geometry III</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">MATH 18<p>Linear Algebra</p></span>
-                        <span id="to_class" class="class">MATH 254<p>Introduction to Linear Algebra</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">PHYS 2A<p>Physics - Mechanics</p></span>
-                        <span id="to_class" class="class">PHYS 195<p>Mechanics</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">PHYS 2B<p>Physics - Electricity and Magnetism</p></span>
-                        <span id="to_class" class="class">PHYS 196<p>Electricity and Magnetism</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CHEM 6A<p>General Chemistry I</p></span>
-                        <span id="to_class" class="class">CHEM 200<p>General Chemistry I</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">CHEM 6B<p>General Chemistry II</p></span>
-                        <span id="to_class" class="class">CHEM 200 &amp; CHEM 201<p>General Chemistry I</p><p>&amp;</p><p>General Chemistry II</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">BILD 1<p>The Cell</p></span>
-                        <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
-                    </div>
-                    <div class="class_group">
-                        <span id="from_class" class="class">BILD 2<p>Multicellular Life</p></span>
-                        <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
+
+                    <div id="screen_4" class="screen" data-page="5" ss-container>
+                        <div class="page-container">
+                            <label for="major">Here are your classes</label>
+                            <input type="text" id="class_search" placeholder="Search for a course here...">
+                            <div id="classes">
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 8A<p>Introduction to Computer Science: Java</p></span>
+                                    <span id="to_class" class="class">CISC 190<p>JAVA Programming</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 8B<p>Introduction to Computer Science: Java</p></span>
+                                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 11<p>Introduction to Computer Science and Object-Oriented Programming: Java</p></span>
+                                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 12<p>Basic Data Structures and Object-Oriented Design</p></span>
+                                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 15L<p>Software Tools and Techniques Laboratory</p></span>
+                                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 20<p>Introduction to Discrete Mathematics</p></span>
+                                    <span id="to_class" class="class">MATH 245<p>Discrete Mathematics</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 21<p>Mathematics for Algorithm and Systems</p></span>
+                                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CSE 30<p>Computer Organization and Systems Programming</p></span>
+                                    <span id="to_class" class="class">N/A<p>No comparable course offered here</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">MATH 20A<p>Calculus for Science and Engineering</p></span>
+                                    <span id="to_class" class="class">MATH 150<p>Calculus with Analytic Geometry I</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">MATH 20B<p>Calculus for Science and Engineering</p></span>
+                                    <span id="to_class" class="class">MATH 151<p>Calculus with Analytic Geometry II</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">MATH 20C<p>Calculus and Analytic Geometry for Science and Engineering</p></span>
+                                    <span id="to_class" class="class">MATH 252<p>Calculus with Analytic Geometry III</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">MATH 18<p>Linear Algebra</p></span>
+                                    <span id="to_class" class="class">MATH 254<p>Introduction to Linear Algebra</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">PHYS 2A<p>Physics - Mechanics</p></span>
+                                    <span id="to_class" class="class">PHYS 195<p>Mechanics</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">PHYS 2B<p>Physics - Electricity and Magnetism</p></span>
+                                    <span id="to_class" class="class">PHYS 196<p>Electricity and Magnetism</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CHEM 6A<p>General Chemistry I</p></span>
+                                    <span id="to_class" class="class">CHEM 200<p>General Chemistry I</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">CHEM 6B<p>General Chemistry II</p></span>
+                                    <span id="to_class" class="class">CHEM 200 &amp; CHEM 201<p>General Chemistry I</p><p>&amp;</p><p>General Chemistry II</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">BILD 1<p>The Cell</p></span>
+                                    <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
+                                </div>
+                                <div class="class_group">
+                                    <span id="from_class" class="class">BILD 2<p>Multicellular Life</p></span>
+                                    <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
+                                </div>
+                            </div>
+                            <div id="controls">
+                                <span class="arrow left" data-target="screen_3" style="float: none;"><span>Back</span></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div id="controls">
-                    <span class="arrow left" data-target="screen_3" style="float: none;"><span>Back</span></span>
-                </div>
+
             </div>
         </div>
 
@@ -186,7 +211,9 @@
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/selectize.min.js"></script>
+    <script type="text/javascript" src="js/simplebar.min.js"></script>
 
+    <!-- NAVIGATION SCRIPT -->
     <script type="text/javascript">
 
         $('nav div span').click(function(e) {
@@ -201,28 +228,79 @@
                 $('nav div span').find('ul').css('max-height', 0);
             }
         });
-        
-        $('.screen').hide();
-        $('#route_chooser').fadeIn();
+
+    </script>
+
+    <!-- PAGE CONTROLLER SCRIPT -->
+    <script type="text/javascript">
+
+        var page = 0;
+
+        //$('.screen').hide();
+        //$('#intro').fadeIn();
+
+        $('#intro div button').click(function() {
+            goToPage(page, ++page);
+        });
 
         $('#transfer').click(function(e) {
             e.preventDefault();
             $('#screen_2 label').text("What college do you want to transfer to?");
-            $('#route_chooser').fadeOut();
-            $('#screen_1').fadeIn();
+            goToPage(page, ++page);
         });
 
         $('#credits').click(function(e) {
             e.preventDefault();
             $('#screen_2 label').text("What college do you want credits from?");
-            $('#route_chooser').fadeOut();
-            $('#screen_1').fadeIn();
+            goToPage(page, ++page);
         });
 
-        $('.arrow').click(function() {
-            $(this).parent().parent().fadeOut();
-            $('#' + $(this).data("target")).fadeIn();
+        $('.left').click(function() {
+            goToPage(page, --page);
         });
+
+        $('.right').click(function() {
+            goToPage(page, ++page);
+        });
+
+        function goToPage(curPage, newPage) {
+            if (page == 0) {
+                $('#color-overlay').css('height', '140px');
+                $('#intro').fadeIn();
+                $('#slider').css('left', '100vw');
+            } else {
+                $('#intro').fadeOut();
+                $('#color-overlay').css('height', '100%');
+                $('#slider').css('left', '-' + (newPage - 1) + '00vw');
+            }
+            // console.log(curPage, newPage);
+            // $('[data-page="' + curPage + '"]').fadeOut();
+            // $('[data-page="' + newPage + '"]').fadeIn();
+            
+        }
+
+        var waitForFinalEvent = function () {
+            var timer;
+            return function (callback, ms) {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(callback, ms);
+            };
+        }();
+
+        $(window).on('resize', function () {
+            $('#slider').css({ transition: 'none' });
+
+            waitForFinalEvent(function () {
+                $('#slider').css({ transition: 'all 0.4s cubic-bezier(0.4, -0.25, 0.4, 1.2)' });
+            }, 500, 1);
+        });
+
+    </script>
+
+    <!-- DROPDOWNS SEARCH SCRIPT -->
+    <script type="text/javascript">
 
         var colleges = [
             "Allan Hancock College",
@@ -549,6 +627,11 @@
 
         $('select').selectize();
 
+    </script>
+
+    <!-- COURSE SEARCH SCRIPT -->
+    <script type="text/javascript">
+
         $('.class_group').each(function() {
             if ($(this).html().indexOf('N/A') >= 0) {
                 $(this).children().css('color', '#e74c3c');
@@ -564,7 +647,6 @@
                 }
             });
         });
-
 
     </script>
 

@@ -85,10 +85,6 @@
                         <div class="page-container">
                             <label for="from_college">What college are you in now?</label>
                             <select class="college" id="from_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
-                            <div id="controls">
-                                <span class="arrow left" data-target="route_chooser"><span>Back</span></span>
-                                <span class="arrow right" data-target="screen_2"><span>Next</span></span>
-                            </div>
                         </div>
                     </div>
 
@@ -96,10 +92,6 @@
                         <div class="page-container">
                             <label for="to_college">What college do you want to transfer to?</label>
                             <select class="college" id="to_college" placeholder="Pick a college..."><option value="" selected="selected"></option></select>
-                            <div id="controls">
-                                <span class="arrow left" data-target="screen_1"><span>Back</span></span>
-                                <span class="arrow right" data-target="screen_3"><span>Next</span></span>
-                            </div>
                         </div>
                     </div>
 
@@ -107,10 +99,6 @@
                         <div class="page-container">
                             <label for="major">What is your major?</label>
                             <select class="major" id="major" placeholder="Pick a major..."><option value="" selected="selected"></option></select>
-                            <div id="controls">
-                                <span class="arrow left" data-target="screen_2"><span>Back</span></span>
-                                <span class="arrow right" data-target="screen_4"><span>Next</span></span>
-                            </div>
                         </div>
                     </div>
 
@@ -192,10 +180,13 @@
                                     <span id="to_class" class="class">BIOL 210A &amp; BIOL 210B<p>Introduction to the Biological Sciences I</p><p>&amp;</p><p>Introduction to the Biological Sciences II</p></span>
                                 </div>
                             </div>
-                            <div id="controls">
-                                <span class="arrow left" data-target="screen_3" style="float: none;"><span>Back</span></span>
-                            </div>
                         </div>
+                    </div>
+
+                    <div id="controls">
+                        <span class="arrow left"><span>Back</span></span>
+                        <span id="progress"><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></span>
+                        <span class="arrow right"><span>Next</span></span>
                     </div>
                 </div>
 
@@ -236,35 +227,38 @@
 
         var page = 0;
 
-        //$('.screen').hide();
-        //$('#intro').fadeIn();
-
         $('#intro div button').click(function() {
-            goToPage(page, ++page);
+            goToPage(++page);
         });
 
         $('#transfer').click(function(e) {
             e.preventDefault();
             $('#screen_2 label').text("What college do you want to transfer to?");
-            goToPage(page, ++page);
+            goToPage(++page);
         });
 
         $('#credits').click(function(e) {
             e.preventDefault();
             $('#screen_2 label').text("What college do you want credits from?");
-            goToPage(page, ++page);
+            goToPage(++page);
         });
 
         $('.left').click(function() {
-            goToPage(page, --page);
+            goToPage(--page);
         });
 
         $('.right').click(function() {
-            goToPage(page, ++page);
+            goToPage(++page);
         });
 
-        function goToPage(curPage, newPage) {
-            if (page == 0) {
+        function goToPage(newPage)
+        {
+            if (newPage > 5) {
+                page = 5;
+                return;
+            }
+
+            if (newPage == 0) {
                 $('#color-overlay').css('height', '140px');
                 $('#intro').fadeIn();
                 $('#slider').css('left', '100vw');
@@ -272,10 +266,48 @@
                 $('#intro').fadeOut();
                 $('#color-overlay').css('height', '100%');
                 $('#slider').css('left', '-' + (newPage - 1) + '00vw');
+                $('#controls').css('left', (newPage - 1) + '00vw');
             }
-            // console.log(curPage, newPage);
-            // $('[data-page="' + curPage + '"]').fadeOut();
-            // $('[data-page="' + newPage + '"]').fadeIn();
+
+            if (newPage == 1 || newPage == 5) {
+                $('.right').css({opacity: 0}).css('visibility', 'hidden');
+            } else {
+                $('.right').css('visibility', 'visible').css({opacity: 1});
+            }
+
+            switch (page) {
+                case 1:
+                    $('#progress').fadeIn();
+                    $($('#progress').children()[0]).css('background', '#3498db');
+                    $($('#progress').children()[1]).css('background', '#ecf0f1');
+                    $($('#progress').children()[2]).css('background', '#ecf0f1');
+                    $($('#progress').children()[3]).css('background', '#ecf0f1');
+                    break;
+                case 2:
+                    $('#progress').fadeIn();
+                    $($('#progress').children()[0]).css('background', '#3498db');
+                    $($('#progress').children()[1]).css('background', '#3498db');
+                    $($('#progress').children()[2]).css('background', '#ecf0f1');
+                    $($('#progress').children()[3]).css('background', '#ecf0f1');
+                    break;
+                case 3:
+                    $('#progress').fadeIn();
+                    $($('#progress').children()[0]).css('background', '#3498db');
+                    $($('#progress').children()[1]).css('background', '#3498db');
+                    $($('#progress').children()[2]).css('background', '#3498db');
+                    $($('#progress').children()[3]).css('background', '#ecf0f1');
+                    break;
+                case 4:
+                    $('#progress').fadeIn();
+                    $($('#progress').children()[0]).css('background', '#3498db');
+                    $($('#progress').children()[1]).css('background', '#3498db');
+                    $($('#progress').children()[2]).css('background', '#3498db');
+                    $($('#progress').children()[3]).css('background', '#3498db');
+                    break;
+                default:
+                    $('#progress').fadeOut();
+                    break;
+            }
             
         }
 
@@ -291,9 +323,11 @@
 
         $(window).on('resize', function () {
             $('#slider').css({ transition: 'none' });
+            $('#controls').css({ transition: 'none' });
 
             waitForFinalEvent(function () {
                 $('#slider').css({ transition: 'all 0.4s cubic-bezier(0.4, -0.25, 0.4, 1.2)' });
+                $('#controls').css({ transition: 'all 0.4s ease-out'});
             }, 500, 1);
         });
 

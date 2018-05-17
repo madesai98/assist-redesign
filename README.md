@@ -1,1 +1,1 @@
-#ASSIST.org Re-Design
+ASSIST.org Re-Design
